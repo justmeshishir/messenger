@@ -2,11 +2,9 @@ package com.messenger.resources;
 
 import com.messenger.model.Message;
 import com.messenger.service.MessageService;
+import com.sun.media.jfxmedia.Media;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -20,6 +18,15 @@ public class MessageResource {
     public List<Message> getMessage(){
         return messageService.getAllMessages();
     }
+
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON) //Accepts JSON Data
+    @Produces(MediaType.APPLICATION_JSON) //Returns JSON Data
+    public Message addMessage(Message message){
+        return messageService.addMessage(message);
+    }
+
 
     @GET
     @Path("{messageId}")
