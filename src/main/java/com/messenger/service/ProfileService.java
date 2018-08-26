@@ -11,6 +11,10 @@ public class ProfileService {
 
     private Map<String, Profile>  profiles = DatabaseClass.getProfiles();
 
+    public ProfileService(){
+        profiles.put("ccr", new Profile(1L, "ccr", "shishir", "thapa"));
+    }
+
     public List<Profile> getAllProfiles(){
         return new ArrayList<Profile>(profiles.values());
     }
@@ -30,6 +34,7 @@ public class ProfileService {
             return null;
         }
         profiles.put(profile.getProfileName(), profile);
+        return profile;
     }
 
     public Profile removeProfile(String profileName){
