@@ -27,6 +27,15 @@ public class MessageResource {
         return messageService.addMessage(message);
     }
 
+    @PUT
+    @Path("{messageId}")
+    @Consumes(MediaType.APPLICATION_JSON) //Accepts JSON Data
+    @Produces(MediaType.APPLICATION_JSON) //Returns JSON Data
+    public Message updateMessage(@PathParam("messageId") long id, Message message) {
+        message.setId(id);
+        return messageService.updateMessage(message);
+    }
+
 
     @GET
     @Path("{messageId}")
