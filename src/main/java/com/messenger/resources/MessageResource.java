@@ -1,6 +1,7 @@
 package com.messenger.resources;
 
 import com.messenger.model.Message;
+import com.messenger.resources.beans.MessageFilterBeans;
 import com.messenger.service.MessageService;
 import com.sun.media.jfxmedia.Media;
 
@@ -16,14 +17,12 @@ public class MessageResource {
     MessageService messageService = new MessageService();
 
     @GET
-    public List<Message> getMessage(@QueryParam("year") int year,
-                                    @QueryParam("start") int start,
-                                    @QueryParam("size") int size){
-        if(year > 0){
-            return messageService.getAllMessageForYear(year);
+    public List<Message> getMessage(@BeanParam MessageFilterBeans filterBeans){
+        if(filterBeans.getYear() > 0){
+            return messageService.getAllMessageForYear(filterBeans.getYear());
         }
-        if(start >= 0 && size > 0){
-            return messageService.getAllMessagesPaginated(start,size);
+        if(filterBeans.getStart() >= 0 && filterBeans.getSize() > 0){
+            return messageService.getAllMessagesPaginated(filterBeans.getStart(),filterBeans.getSize());
         }
         return messageService.getAllMessages();
     }
