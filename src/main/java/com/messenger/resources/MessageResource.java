@@ -16,7 +16,15 @@ public class MessageResource {
     MessageService messageService = new MessageService();
 
     @GET
-    public List<Message> getMessage(){
+    public List<Message> getMessage(@QueryParam("year") int year,
+                                    @QueryParam("start") int start,
+                                    @QueryParam("size") int size){
+        if(year > 0){
+            return messageService.getAllMessageForYear(year);
+        }
+        if(start >= 0 && size > 0){
+            return messageService.getAllMessagesPaginated(start,size);
+        }
         return messageService.getAllMessages();
     }
 
