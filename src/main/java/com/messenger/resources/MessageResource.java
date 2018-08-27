@@ -7,6 +7,7 @@ import com.sun.media.jfxmedia.Media;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("messages")
@@ -29,8 +30,11 @@ public class MessageResource {
 
 
     @POST
-    public Message addMessage(Message message){
-        return messageService.addMessage(message);
+    public Response addMessage(Message message){
+        Message newMessage = messageService.addMessage(message);
+        return Response.status(Response.Status.CREATED)
+                        .entity(newMessage)
+                        .build();
     }
 
     @PUT
