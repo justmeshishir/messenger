@@ -16,7 +16,9 @@ import java.util.List;
 
 @Path("messages")
 @Consumes(MediaType.APPLICATION_JSON) //Accepts JSON Data
-@Produces(MediaType.APPLICATION_JSON) //Returns JSON Data
+//@Produces(MediaType.APPLICATION_JSON) //Returns JSON Data
+@Produces(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_XML}) //Returns JSON and XML data as per accept header Data
+
 public class MessageResource {
 
     MessageService messageService = new MessageService();
